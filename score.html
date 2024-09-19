@@ -19,7 +19,12 @@
             font-family: 'Arial', sans-serif;
             color: #333;
         }
-
+   #container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 60px;
+        }
         /* สไตล์ sidebar */
         .sidebar {
             width: 225px; /* ปรับความกว้างของ sidebar */
@@ -67,12 +72,16 @@
         }
 
         /* สไตล์ของคอนเทนเนอร์และแคนวาส */
-        #container {
+   #musicCanvas {
+            border: 15px solid hsl(51, 100%, 50%);
+            border-radius: 58px;
             display: flex;
-            align-items: center;
             justify-content: center;
-            margin-top: 5px;
-        }
+            align-items: center;
+            position: relative;
+            background-color: rgb(253, 253, 253); /* พื้นสีขาว */
+            width: 1000px;
+            height: 650px;
 
         #musicCanvas {
             border-radius: 58px;
@@ -114,6 +123,7 @@
         <button onclick="switchMode('score.html')">คะแนน</button>
     </div>
     
+
     <div class="content">
         <!-- คอนเทนเนอร์และแคนวาสสำหรับเกมดนตรี -->
         <div id="container">
