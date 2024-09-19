@@ -8,14 +8,12 @@
         /* กำหนดการตั้งค่าพื้นฐานของหน้า */
         body, html {
             margin: 0;
-            border: 10px solid #ffffff; /* ขอบปุ่มสีขาว */
             padding: 0;
             height: 100%;
             width: 100%;
-            background: #d8aa11; /* พื้นหลังสีฟ้าออกม่วงๆ */
+            background: #d8aaff; /* พื้นหลังสีฟ้าออกม่วงๆ */
             display: flex;
             align-items: stretch;
-            border-radius: 10px;
         }
         
         /* กำหนดสไตล์ของ sidebar */
@@ -32,14 +30,14 @@
         
         /* กำหนดสไตล์ของปุ่มใน sidebar */
         .sidebar button {
-            background: #4a90e2; /* พื้นหลังปุ่มสีฟ้า */
+            background: #d8aa11; /* พื้นหลังปุ่มสีใหม่ #d8aa11 */
             color: white; /* ตัวหนังสือสีขาว */
-            border: 8px solid #ffffff; /* ขอบปุ่มสีขาว */
-            padding: 20px; /* ขนาดของปุ่ม */
+            border: 2px solid #ffffff; /* ขอบปุ่มสีขาว */
+            padding: 15px; /* ขนาดของปุ่ม */
             width: 100%; /* ความกว้างของปุ่มเต็มพื้นที่ */
             cursor: pointer; /* เปลี่ยนเคอร์เซอร์เป็นรูปมือเมื่อวางเมาส์ */
             border-radius: 10px; /* มุมปุ่มมน */
-            font-size: 1.5rem; /* ขนาดตัวอักษรในปุ่ม */
+            font-size: 1.2rem; /* ขนาดตัวอักษรในปุ่ม */
             transition: transform 0.2s ease-in-out; /* เอฟเฟกต์การเคลื่อนไหว */
             text-align: center; /* จัดกลางข้อความในปุ่ม */
         }
@@ -53,7 +51,7 @@
         .content {
             flex: 1;
             background: #ffff00; /* พื้นสีเหลือง */
-            border: 10px solid #ffffff; /* ขอบสีขาว */
+            border: 5px solid #ffffff; /* ขอบสีขาว */
             padding: 20px; /* เพิ่ม padding ภายใน content */
             box-sizing: border-box;
         }
@@ -67,15 +65,14 @@
     </style>
 </head>
 <body>
-
-
- <div id="sidebar">
-            <button onclick="switchMode('learn.html')">เรียน</button>
-            <button onclick="switchMode('game.html')">เล่นเกมส์</button>
-            <button onclick="switchMode('score.html')">คะแนน</button>
-        </div>
-
-   
+    <div class="sidebar">
+        <!-- ปุ่มเริ่มเกมส์ -->
+        <button>เริ่มเกมส์</button>
+        <!-- ปุ่มเรียน -->
+        <button>เรียน</button>
+        <!-- ปุ่มคะแนน -->
+        <button>คะแนน</button>
+    </div>
     <div class="content">
         <h1>มาเล่นเกมส์ทายตัวโน๊ตกันเถอะ</h1>
     </div>
