@@ -291,6 +291,16 @@
         #menusp button:focus {
             outline: none;
         }
+
+:fullscreen #musicCanvas,
+:webkit-full-screen #musicCanvas,
+:moz-full-screen #musicCanvas,
+:ms-fullscreen #musicCanvas {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+}
+
     </style>
 </head>
 
@@ -509,6 +519,32 @@ function toggleFullScreen() {
         document.exitFullscreen();
     }
 }
+
+function toggleFullScreen() {
+    const element = document.getElementById('musicCanvas');
+    if (!document.fullscreenElement) {
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if (element.webkitRequestFullscreen) { /* Safari */
+            element.webkitRequestFullscreen();
+        } else if (element.mozRequestFullScreen) { /* Firefox */
+            element.mozRequestFullScreen();
+        } else if (element.msRequestFullscreen) { /* IE/Edge */
+            element.msRequestFullscreen();
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { /* Safari */
+            document.webkitExitFullscreen();
+        } else if (document.mozCancelFullScreen) { /* Firefox */
+            document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) { /* IE/Edge */
+            document.msExitFullscreen();
+        }
+    }
+}
+
 
     </script>
     
