@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Layout</title>
+    <title>Responsive Layout - MUSIC THEORY BY KRUBOY</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* กำหนดการตั้งค่าพื้นฐานของหน้า */
+        /* สไตล์พื้นฐาน */
         body, html {
             margin: 0;
             padding: 0;
@@ -14,67 +16,124 @@
             background: #d8aaff; /* พื้นหลังสีฟ้าออกม่วงๆ */
             display: flex;
             align-items: stretch;
+            font-family: 'Arial', sans-serif;
+            color: #333;
         }
-        
-        /* กำหนดสไตล์ของ sidebar */
+
+        /* สไตล์ sidebar */
         .sidebar {
             width: 200px; /* ปรับความกว้างของ sidebar */
-            background: #ffffff; /* พื้นหลังสีขาว */
+            background: #ffffff;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* จัดกลางแนวตั้ง */
-            align-items: center; /* จัดกลางแนวนอน */
-            padding: 20px; /* เพิ่ม padding ภายใน sidebar */
-            gap: 10px; /* ระยะห่างระหว่างปุ่ม */
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            gap: 10px;
         }
-        
-        /* กำหนดสไตล์ของปุ่มใน sidebar */
+
         .sidebar button {
-            background: #d8aa11; /* พื้นหลังปุ่มสีใหม่ #d8aa11 */
-            color: white; /* ตัวหนังสือสีขาว */
-            border: 2px solid #ffffff; /* ขอบปุ่มสีขาว */
-            padding: 15px; /* ขนาดของปุ่ม */
-            width: 100%; /* ความกว้างของปุ่มเต็มพื้นที่ */
-            cursor: pointer; /* เปลี่ยนเคอร์เซอร์เป็นรูปมือเมื่อวางเมาส์ */
-            border-radius: 10px; /* มุมปุ่มมน */
-            font-size: 1.2rem; /* ขนาดตัวอักษรในปุ่ม */
-            transition: transform 0.2s ease-in-out; /* เอฟเฟกต์การเคลื่อนไหว */
-            text-align: center; /* จัดกลางข้อความในปุ่ม */
+            background: #007bff;
+            color: white;
+            border: 2px solid #ffffff;
+            padding: 15px;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            transition: transform 0.2s ease-in-out;
+            text-align: center;
         }
-        
-        /* กำหนดสไตล์เมื่อวางเมาส์บนปุ่ม */
+
         .sidebar button:hover {
-            transform: translateY(-5px); /* ทำให้ปุ่มเด้งขึ้นเมื่อวางเมาส์ */
+            transform: translateY(-5px);
         }
-        
-        /* กำหนดสไตล์ของ content */
+
+        /* สไตล์ content */
         .content {
             flex: 1;
-            background: #ffff00; /* พื้นสีเหลือง */
-            border: 5px solid #ffffff; /* ขอบสีขาว */
-            padding: 20px; /* เพิ่ม padding ภายใน content */
-            box-sizing: border-box;
+            background: #ffff00;
+            border: 5px solid #ffffff;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
-        
-        /* กำหนดสไตล์ของหัวข้อใน content */
+
         .content h1 {
-            font-size: 2rem; /* ขนาดตัวอักษรหัวข้อ */
-            text-align: center; /* จัดกลางข้อความ */
-            margin-top: 0; /* เอาระยะห่างด้านบนออก */
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        /* สไตล์ของคอนเทนเนอร์และแคนวาส */
+        #container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        #musicCanvas {
+            border-radius: 58px;
+            background-color: #fff;
         }
     </style>
 </head>
+
 <body>
     <div class="sidebar">
-        <!-- ปุ่มเริ่มเกมส์ -->
-        <button>เริ่มเกมส์</button>
-        <!-- ปุ่มเรียน -->
-        <button>เรียน</button>
-        <!-- ปุ่มคะแนน -->
-        <button>คะแนน</button>
+        <!-- ปุ่มเมนู -->
+        <button onclick="switchMode('learn.html')">เรียน</button>
+        <button onclick="switchMode('game.html')">เล่นเกมส์</button>
+        <button onclick="switchMode('score.php')">คะแนน</button>
     </div>
+    
     <div class="content">
         <h1>มาเล่นเกมส์ทายตัวโน๊ตกันเถอะ</h1>
+        <!-- คอนเทนเนอร์และแคนวาสสำหรับเกมดนตรี -->
+        <div id="container">
+            <canvas id="musicCanvas" width="1000" height="650"></canvas>
+        </div>
     </div>
+
+    <script>
+        function switchMode(page) {
+            window.location.href = page;
+        }
+
+        window.onload = function () {
+            const canvas = document.getElementById('musicCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Draw background image
+            const backgroundImage = new Image();
+            backgroundImage.src = 'logo.png'; // Replace with the path to your background image
+
+            backgroundImage.onload = function () {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+            };
+
+            canvas.addEventListener('click', function (event) {
+                const rect = canvas.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+
+                const linkRegions = [
+                    { x: 100, y: 100, width: 200, height: 100, url: 'https://example.com/page1' }
+                ];
+
+                for (const region of linkRegions) {
+                    if (x >= region.x && x <= region.x + region.width &&
+                        y >= region.y && y <= region.y + region.height) {
+                        window.location.href = region.url;
+                        return;
+                    }
+                }
+            });
+        };
+    </script>
 </body>
+
 </html>
