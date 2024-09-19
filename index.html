@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Box</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+        .responsive-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #4CAF50; /* สีพื้นหลัง */
+            width: 100vw; /* ความกว้าง 100% ของ viewport width */
+            height: 100vh; /* ความสูง 100% ของ viewport height */
+            box-sizing: border-box;
+            color: white;
+            font-size: 2rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="responsive-box">
+        กล่อง 4 เหลี่ยมที่ขนาดพอดีหน้าจอ
+    </div>
+</body>
+</html>
