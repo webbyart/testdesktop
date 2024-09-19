@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Layout</title>
     <style>
+        /* กำหนดการตั้งค่าพื้นฐานของหน้า */
         body, html {
             margin: 0;
             padding: 0;
@@ -14,44 +15,60 @@
             display: flex;
             align-items: stretch;
         }
+        
+        /* กำหนดสไตล์ของ sidebar */
         .sidebar {
-            width: 150px;
-            background: #ffffff;
+            width: 200px; /* ปรับความกว้างของ sidebar */
+            background: #ffffff; /* พื้นหลังสีขาว */
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 10px;
+            padding: 20px; /* เพิ่ม padding ภายใน sidebar */
         }
+        
+        /* กำหนดสไตล์ของปุ่มใน sidebar */
         .sidebar button {
-            background: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px;
-            margin: 5px 0;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 1rem;
-            width: 100%;
+            background: #4a90e2; /* พื้นหลังปุ่มสีฟ้า */
+            color: white; /* ตัวหนังสือสีขาว */
+            border: 5px solid #ffffff; /* ขอบปุ่มสีขาว */
+            padding: 15px 25px; /* ขนาดของปุ่ม */
+            margin: 10px 0; /* ระยะห่างระหว่างปุ่ม */
+            /*cursor: pointer;  เปลี่ยนเคอร์เซอร์เป็นรูปมือเมื่อวางเมาส์ */
+            border-radius: 10px; /* มุมปุ่มมน */
+            font-size: 1.2rem; /* ขนาดตัวอักษรในปุ่ม */
+            transition: transform 0.2s ease-in-out; /* เอฟเฟกต์การเคลื่อนไหว */
         }
+        
+        /* กำหนดสไตล์เมื่อวางเมาส์บนปุ่ม */
+        .sidebar button:hover {
+            transform: translateY(-5px); /* ทำให้ปุ่มเด้งขึ้นเมื่อวางเมาส์ */
+        }
+        
+        /* กำหนดสไตล์ของ content */
         .content {
             flex: 1;
             background: #ffff00; /* พื้นสีเหลือง */
             border: 5px solid #ffffff; /* ขอบสีขาว */
-            padding: 20px;
+            padding: 20px; /* เพิ่ม padding ภายใน content */
             box-sizing: border-box;
         }
+        
+        /* กำหนดสไตล์ของหัวข้อใน content */
         .content h1 {
-            font-size: 2rem;
-            text-align: center;
-            margin-top: 0;
+            font-size: 2rem; /* ขนาดตัวอักษรหัวข้อ */
+            text-align: center; /* จัดกลางข้อความ */
+            margin-top: 0; /* เอาระยะห่างด้านบนออก */
         }
     </style>
 </head>
 <body>
     <div class="sidebar">
-        <button>ปุ่ม 1</button>
-        <button>ปุ่ม 2</button>
-        <button>ปุ่ม 3</button>
+        <!-- ปุ่มเริ่มเกมส์ -->
+        <button>เริ่มเกมส์</button>
+        <!-- ปุ่มเรียน -->
+        <button>เรียน</button>
+        <!-- ปุ่มคะแนน -->
+        <button>คะแนน</button>
     </div>
     <div class="content">
         <h1>มาเล่นเกมส์ทายตัวโน๊ตกันเถอะ</h1>
