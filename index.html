@@ -106,12 +106,12 @@
             const canvas = document.getElementById('musicCanvas');
             const ctx = canvas.getContext('2d');
 
-            // Draw background image
+            // โหลดภาพพื้นหลัง
             const backgroundImage = new Image();
-            backgroundImage.src = 'logo.png'; // Replace with the path to your background image
+            backgroundImage.src = 'pic/BG.jpg'; // ระบุพาธของภาพ
 
             backgroundImage.onload = function () {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                // วาดภาพพื้นหลังใน canvas
                 ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
             };
 
