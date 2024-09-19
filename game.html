@@ -401,24 +401,24 @@
             }
         }
     
-        function saveScore() {
-            isScoreSaved = false; // ตั้งค่าเริ่มต้น
-            const data = { name: document.getElementById('playerName').value, score: score };
-            fetch('save_score.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                isScoreSaved = true;
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                setTimeout(saveScore, 2000); // Retry หากเกิดข้อผิดพลาด
-            })
-        }
+        function saveScore(callback) {
+    const data = { name: document.getElementById('playerName').value, score: score };
+    fetch('save_score.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Score saved:', data);
+        if (callback) callback(); // Call the callback function after saving the score
+    })
+    .catch(error => {
+        console.error('Error saving score:', error);
+        // Optionally handle retry logic here
+        if (callback) callback(); // Ensure the callback is called even if an error occurs
+    });
+}
     
         function showQuarterNoteAt(x, y) {
             const quarterNote = document.createElement('div');
@@ -466,11 +466,34 @@
             window.location.href = page;
         }
     
-        function endGame() {
-            clearInterval(gameInterval);
-            alert('จบเกม! คะแนนของคุณคือ: ' + score);
+       function endGame() {
+    clearInterval(gameInterval);
+
+    // Display the final score
+    const finalMessage = document.createElement('div');
+    finalMessage.id = 'finalMessage';
+    finalMessage.style.position = 'absolute';
+    finalMessage.style.top = '50%';
+    finalMessage.style.left = '50%';
+    finalMessage.style.transform = 'translate(-50%, -50%)';
+    finalMessage.style.fontSize = '48px';
+    finalMessage.style.color = 'black';
+    finalMessage.style.backgroundColor = 'white';
+    finalMessage.style.padding = '20px';
+    finalMessage.style.borderRadius = '10px';
+    finalMessage.innerHTML = 'จบเกม! คะแนนของคุณคือ: ' + score;
+    document.body.appendChild(finalMessage);
+
+    // Save score to file
+    saveScore(() => {
+        // After saving the score, wait for 5 seconds and then reload the page
+        setTimeout(() => {
+            finalMessage.remove();
             location.reload();
-        }
+        }, 5000);
+    });
+}
+
     </script>
     
     
