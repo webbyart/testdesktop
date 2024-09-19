@@ -4,53 +4,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MUSIC THEORY BY KRUBOY</title>
+    <title>Responsive Layout - MUSIC THEORY BY KRUBOY</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #7f91db;
+        /* สไตล์พื้นฐาน */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background: #d8aaff; /* พื้นหลังสีฟ้าออกม่วงๆ */
+            display: flex;
+            align-items: stretch;
             font-family: 'Arial', sans-serif;
             color: #333;
-            cursor: url('music-notes.png'), auto; /* ใช้ path ของรูปตัวโน้ตที่คุณต้องการ */
         }
 
+        /* สไตล์ sidebar */
+        .sidebar {
+            width: 225px; /* ปรับความกว้างของ sidebar */
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            gap: 15px; /* เพิ่มช่องว่างระหว่างปุ่ม */
+        }
+
+        .sidebar button {
+            background: #007bff;
+            color: white;
+            border: 2px solid #ffffff;
+            padding: 25px; /* เพิ่มขนาด padding เพื่อให้ปุ่มใหญ่ขึ้น */
+            width: 100%;
+            cursor: pointer;
+            border-radius: 15px; /* เพิ่มความมนของปุ่ม */
+            font-size: 1.5rem; /* ปรับขนาดตัวอักษรในปุ่ม */
+            transition: transform 0.2s ease-in-out;
+            text-align: center;
+        }
+
+        .sidebar button:hover {
+            transform: translateY(-5px);
+        }
+
+        /* สไตล์ content */
+        .content {
+            flex: 1;
+            background: #ffff00;
+            border: 5px solid #ffffff;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content h1 {
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        /* สไตล์ของคอนเทนเนอร์และแคนวาส */
         #container {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 60px;
-        }
-
-        #menu {
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            margin-right: 20px;
-            height: 500px; /* ความสูงของกล่องเมนู */
-        }
-
-        #menu button {
-            background-color: #007bff; /* สีฟ้าสำหรับปุ่ม */
-            border: 5px solid #fff; /* ขอบสีขาว */
-            color: white;
-            font-size: 40px;
-            padding: 0; /* ลบ padding เพื่อตั้งขนาดปุ่มให้เหมาะสม */
-            margin: 10px 0;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: transform 0.2s;
-            width: 250px; /* กว้างเท่ากับความกว้างของกล่องเมนู */
-            height: calc(100% / 3 - 20px); /* ความสูงของปุ่มแต่ละปุ่มพอดีกับกล่อง */
-            box-sizing: border-box;
-        }
-
-        #menu button:hover {
-            transform: scale(1.1);
-            background-color: #0056b3;
-        }
-
-        #menu button:focus {
-            outline: none;
+            margin-top: 5px;
         }
 
         #musicCanvas {
@@ -60,7 +81,6 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            background-color: #fff; /* พื้นสีขาว */
             overflow: hidden; /* ซ่อนสิ่งที่เกินขอบ */
         }
 
@@ -108,34 +128,31 @@
 </head>
 
 <body>
-    <!-- คอนเทนเนอร์สำหรับจัดวางเมนูและแคนวาส -->
-    <div id="container">
-        <!-- เมนูสำหรับเลือกโหมด -->
-        <div id="menu">
-            <button onclick="switchMode('learn.html')">เรียน</button>
-            <button onclick="switchMode('game.html')">เล่นเกมส์</button>
-            <button onclick="switchMode('score.html')">คะแนน</button>
-        </div>
-
-        <!-- แคนวาสสำหรับแสดงรูปภาพ -->
-        <div id="musicCanvas">
-            <canvas id="canvas" width="1000" height="650"></canvas>
-            <!-- ปุ่มถัดไปและย้อนหลัง -->
-            <div class="nav-buttons">
-                <button onclick="previousImage()">ย้อนกลับ</button>
-                <button onclick="nextImage()">ถัดไป</button>
+    <div class="sidebar">
+        <!-- ปุ่มเมนู -->
+        <button onclick="switchMode('learn.html')">เรียน</button>
+        <button onclick="switchMode('game.html')">เล่นเกมส์</button>
+        <button onclick="switchMode('score.html')">คะแนน</button>
+    </div>
+    
+    <div class="content">
+        <!-- คอนเทนเนอร์และแคนวาสสำหรับเกมดนตรี -->
+        <div id="container">
+            <div id="musicCanvas">
+                <canvas id="canvas" width="1000" height="650"></canvas>
+                <div class="nav-buttons">
+                    <button onclick="previousImage()">ย้อนกลับ</button>
+                    <button onclick="nextImage()">ถัดไป</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- กล่องข้อความสำหรับแสดงตัวโน้ต -->
     <div id="noteBox"></div>
 
     <script>
-        const images = ['BG.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg'];
+        const images = ['BG.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg'];
         let currentIndex = 0;
-
-       
 
         function updateImage() {
             const canvas = document.getElementById('canvas');
@@ -144,27 +161,13 @@
             imgElement.src = 'pic/' + images[currentIndex];
 
             imgElement.onload = function() {
-                // วาดภาพพื้นหลัง
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // ล้าง canvas ก่อนวาดใหม่
                 ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
-
-                // วาดเส้นโน้ตสำหรับภาพที่ 4
-                if (currentIndex === 3) {
-                    ctx.strokeStyle = '#000';
-                    ctx.lineWidth = 2;
-                    lines.forEach(line => {
-                        ctx.beginPath();
-                        ctx.moveTo(50, line.y);
-                        ctx.lineTo(canvas.width - 50, line.y);
-                        ctx.stroke();
-                    });
-                }
             };
 
             if (currentIndex === 3) {
-                // เพิ่ม event listener สำหรับการคลิกที่แคนวาส
                 canvas.addEventListener('click', playSound);
             } else {
-                // ลบ event listener หากไม่ใช่ภาพที่ 4
                 canvas.removeEventListener('click', playSound);
             }
         }
@@ -188,28 +191,29 @@
             const rect = canvas.getBoundingClientRect();
             const y = event.clientY - rect.top;
 
-            // หาตำแหน่งของเส้นโน้ตที่คลิก
+            const lines = [
+                { y: 100, note: 'C', sound: 'sounds/C.mp3' },
+                { y: 150, note: 'D', sound: 'sounds/D.mp3' },
+                { y: 200, note: 'E', sound: 'sounds/E.mp3' },
+                // เพิ่มโน้ตอื่น ๆ ที่นี่
+            ];
+
             for (const line of lines) {
-                if (Math.abs(y - line.y) < 10) { // 10 คือค่าความแม่นยำของการคลิก
-                    // เล่นเสียงโน้ต
+                if (Math.abs(y - line.y) < 10) {
                     const audio = new Audio(line.sound);
                     audio.play();
 
-                    // แสดงโน้ตที่คลิกในกล่องข้อความ
                     const noteBox = document.getElementById('noteBox');
                     noteBox.textContent = 'โน้ตที่คลิก: ' + line.note;
                     noteBox.style.left = event.clientX + 'px';
-                    noteBox.style.top = (event.clientY - 50) + 'px'; // ปรับตำแหน่งของกล่องให้สูงขึ้น
-
-                    // แสดงกล่องข้อความ
+                    noteBox.style.top = (event.clientY - 50) + 'px';
                     noteBox.style.display = 'block';
 
-                    // ปิดกล่องข้อความอัตโนมัติหลังจาก 2 วินาที
                     setTimeout(() => {
                         noteBox.style.opacity = '0';
                         setTimeout(() => {
                             noteBox.style.display = 'none';
-                            noteBox.style.opacity = '1'; // รีเซ็ตค่า opacity
+                            noteBox.style.opacity = '1';
                         }, 500);
                     }, 2000);
                     return;
@@ -217,7 +221,6 @@
             }
         }
 
-        // เรียกฟังก์ชัน updateImage เมื่อโหลดหน้า
         window.onload = updateImage;
     </script>
 </body>
