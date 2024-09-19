@@ -4,21 +4,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MUSIC THEORY BY KRUBOY</title>
+    <title>Responsive Layout - MUSIC THEORY BY KRUBOY</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #7f91db;
+        /* สไตล์พื้นฐาน */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background: #d8aaff; /* พื้นหลังสีฟ้าออกม่วงๆ */
+            display: flex;
+            align-items: stretch;
             font-family: 'Arial', sans-serif;
             color: #333;
-            cursor: pointer;
         }
 
+        /* สไตล์ sidebar */
+        .sidebar {
+            width: 225px; /* ปรับความกว้างของ sidebar */
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            gap: 15px; /* เพิ่มช่องว่างระหว่างปุ่ม */
+        }
+
+        .sidebar button {
+            background: #007bff;
+            color: white;
+            border: 2px solid #ffffff;
+            padding: 25px; /* เพิ่มขนาด padding เพื่อให้ปุ่มใหญ่ขึ้น */
+            width: 100%;
+            cursor: pointer;
+            border-radius: 15px; /* เพิ่มความมนของปุ่ม */
+            font-size: 1.5rem; /* ปรับขนาดตัวอักษรในปุ่ม */
+            transition: transform 0.2s ease-in-out;
+            text-align: center;
+        }
+
+        .sidebar button:hover {
+            transform: translateY(-5px);
+        }
+
+        /* สไตล์ content */
+        .content {
+            flex: 1;
+            background: #ffff00;
+            border: 5px solid #ffffff;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content h1 {
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        /* สไตล์ของคอนเทนเนอร์และแคนวาส */
         #container {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 60px;
+            margin-top: 5px;
+        }
+
+        #musicCanvas {
+            border-radius: 58px;
+            background-color: #fff;
+            position: relative;
+            width: 1000px;
+            height: 650px;
+            border: 20px solid #fff;
+            background: url('pic/gameS.png') no-repeat center center;
+            background-size: cover;
+            cursor: url('pic/clickNote.png'), auto; /* Custom cursor */
+        }
+
+        .quarter-note {
+            position: absolute;
+            font-size: 32px;
+            color: black;
+            animation: fadeOut 2s forwards;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        #clickNote {
+            position: absolute;
+            display: none; /* ซ่อนเริ่มต้น */
+            width: 50px; /* ปรับขนาดให้เหมาะสม */
+            height: 50px; /* ปรับขนาดให้เหมาะสม */
+            background: url('pic/clickNote.png') no-repeat center center;
+            background-size: contain;
+        }
+
+        .note {
+            position: absolute;
+            font-size: 40px;
+            color: black;
+            font-weight: bold;
+        }
+
+        #correctMessage {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            color: green;
+            font-weight: bold;
+        }
+
+        #wall {
+            position: absolute;
+            top: 170px;
+            left: 10px;
+            width: 20px;
+            height: 90px;
+            background-color: #8B4513;
+        }
+
+        #loseMessage {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 64px;
+            color: red;
+            font-weight: bold;
+        }
+
+        #scoreBoard {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .staff-line {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background-color: black;
+        }
+
+        .note-image {
+            position: absolute;
+            top: 205px;
+            left: 0;
+            width: 160px;
+        }
+
+        .staff-line:nth-child(1) {
+            top: 440px;
+        }
+
+        .staff-line:nth-child(2) {
+            top: 395px;
+        }
+
+        .staff-line:nth-child(3) {
+            top: 350px;
+        }
+
+        .staff-line:nth-child(4) {
+            top: 305px;
+        }
+
+        .staff-line:nth-child(5) {
+            top: 260px;
         }
 
         #menu {
@@ -102,154 +274,49 @@
         #menusp button:focus {
             outline: none;
         }
-
-        #musicCanvas {
-            position: relative;
-            width: 1000px;
-            height: 650px;
-            border: 20px solid #fff;
-            border-radius: 58px;
-            background: url('pic/gameS.png') no-repeat center center;
-            background-size: cover;
-            cursor: url('pic/clickNote.png'), auto; /* Custom cursor */
-        }
-
-        .quarter-note {
-            position: absolute;
-            font-size: 32px;
-            color: black;
-            animation: fadeOut 2s forwards;
-        }
-        @keyframes fadeOut {
-            0% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-            }
-        }
-
-
-
-        #clickNote {
-            position: absolute;
-            display: none; /* ซ่อนเริ่มต้น */
-            width: 50px; /* ปรับขนาดให้เหมาะสม */
-            height: 50px; /* ปรับขนาดให้เหมาะสม */
-            background: url('pic/clickNote.png') no-repeat center center;
-            background-size: contain;
-        }
-
-     
-        .note {
-            position: absolute;
-            font-size: 40px;
-            color: black;
-            font-weight: bold;
-        }
-
-        #correctMessage {
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 48px;
-            color: green;
-            font-weight: bold;
-        }
-
-        #wall {
-            position: absolute;
-            top: 170px;
-            left: 10px;
-            width: 20px;
-            height: 90px;
-            background-color: #8B4513;
-        }
-
-        #loseMessage {
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 64px;
-            color: red;
-            font-weight: bold;
-        }
-
-        #scoreBoard {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-        }
-
-        .staff-line {
-            position: absolute;
-            left: 0;
-            width: 100%;
-            height: 15px;
-            background-color: black;
-        }
-
-        .note-image {
-            position: absolute;
-            top: 205px;
-            left: 0;
-            width: 160px;
-        }
-
-        .staff-line:nth-child(1) {
-            top: 440px;
-        }
-
-        .staff-line:nth-child(2) {
-            top: 395px;
-        }
-
-        .staff-line:nth-child(3) {
-            top: 350px;
-        }
-
-        .staff-line:nth-child(4) {
-            top: 305px;
-        }
-
-        .staff-line:nth-child(5) {
-            top: 260px;
-        }
     </style>
 </head>
 
 <body>
-    <div id="container">
-        <div id="menu">
+    <div class="sidebar">
+        <!-- ปุ่มเมนู -->
+        <button onclick="switchMode('learn.html')">เรียน</button>
+        <button onclick="switchMode('game.html')">เล่นเกมส์</button>
+        <button onclick="switchMode('score.html')">คะแนน</button>
+    </div>
+    
+    <div class="content">
+        <!-- คอนเทนเนอร์และแคนวาสสำหรับเกมดนตรี -->
+        <div id="container">
+            <div id="menu">
+                <input type="text" id="playerName" placeholder="ใส่ชื่อของคุณ">
+                <button onclick="startGame()">เริ่มเกมส์</button>
+                <button onclick="switchMode('learn.html')">เรียน</button>
+                <button onclick="switchMode('score.html')">คะแนน</button>
+            </div>
+
+            <div id="musicCanvas">
+                <div class="staff-line" style="top: 440px;"></div>
+                <div class="staff-line" style="top: 395px;"></div>
+                <div class="staff-line" style="top: 350px;"></div>
+                <div class="staff-line" style="top: 305px;"></div>
+                <div class="staff-line" style="top: 260px;"></div>
+                <img src="pic/note1.png" class="note-image" alt="Note Image">
+                <div id="wall"></div>
+                <div id="loseMessage">แพ้!</div>
+                <div id="correctMessage">คุณใส่ถูกต้อง!</div>
+                <div id="scoreBoard">คะแนน: 0</div>
+            </div>
+        </div>
+
+        <div id="menusp">
             <input type="text" id="playerName" placeholder="ใส่ชื่อของคุณ">
             <button onclick="startGame()">เริ่มเกมส์</button>
             <button onclick="switchMode('learn.html')">เรียน</button>
             <button onclick="switchMode('score.html')">คะแนน</button>
         </div>
-
-        <div id="musicCanvas">
-            <div class="staff-line" style="top: 440px;"></div>
-            <div class="staff-line" style="top: 395px;"></div>
-            <div class="staff-line" style="top: 350px;"></div>
-            <div class="staff-line" style="top: 305px;"></div>
-            <div class="staff-line" style="top: 260px;"></div>
-            <img src="pic/note1.png" class="note-image" alt="Note Image">
-            <div id="wall"></div>
-            <div id="loseMessage">แพ้!</div>
-            <div id="correctMessage">คุณใส่โน้ตถูกต้อง!</div>
-            <div id="scoreBoard">ชื่อ: <span id="displayName"></span> คะแนน: <span id="score">0</span></div>
-
-            
-        </div>
     </div>
-
+    
     <script>
         const gameStartAudio = new Audio('sounds/game-start.mp3');
         const backgroundAudio = new Audio('sounds/background.mp3');
@@ -257,13 +324,10 @@
         backgroundAudio.volume = 0.1;
     
         const notes = [
-            
-          
+                 
            
-          
-       
-          
-        
+              
+                  
             { y: 190, note: 'Cํ', sound: 'sounds/8เสียง Cสูง.mp3', lineY: 360 },
             { y: 190, note: 'B', sound: 'sounds/7เสียงB.mp3', lineY: 370 },
             { y: 190, note: 'A', sound: 'sounds/6เสียงA.mp3', lineY: 385 },
@@ -359,8 +423,8 @@
             const quarterNote = document.createElement('div');
             quarterNote.className = 'quarter-note';
             quarterNote.textContent = '♩'; // สัญลักษณ์ Quarter Note
-            quarterNote.style.left = (x - 25) + 'px'; // ปรับตำแหน่ง x
-            quarterNote.style.top = (y - 32) + 'px';  // ปรับตำแหน่ง y
+            quarterNote.style.left = (x - 35) + 'px'; // ปรับตำแหน่ง x
+            quarterNote.style.top = (y - 100) + 'px';  // ปรับตำแหน่ง y
             document.getElementById('musicCanvas').appendChild(quarterNote);
     
             // ซ่อนโน้ตหลังจาก 2 วินาที
