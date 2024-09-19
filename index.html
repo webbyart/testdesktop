@@ -11,7 +11,7 @@
             padding: 0;
             height: 100%;
             width: 100%;
-            background: #d8aaff; /* พื้นหลังสีฟ้าออกม่วงๆ */
+            background: #d8aa11; /* พื้นหลังสีฟ้าออกม่วงๆ */
             display: flex;
             align-items: stretch;
         }
@@ -22,8 +22,10 @@
             background: #ffffff; /* พื้นหลังสีขาว */
             display: flex;
             flex-direction: column;
-            align-items: center;
+            justify-content: center; /* จัดกลางแนวตั้ง */
+            align-items: center; /* จัดกลางแนวนอน */
             padding: 20px; /* เพิ่ม padding ภายใน sidebar */
+            gap: 10px; /* ระยะห่างระหว่างปุ่ม */
         }
         
         /* กำหนดสไตล์ของปุ่มใน sidebar */
@@ -31,12 +33,13 @@
             background: #4a90e2; /* พื้นหลังปุ่มสีฟ้า */
             color: white; /* ตัวหนังสือสีขาว */
             border: 5px solid #ffffff; /* ขอบปุ่มสีขาว */
-            padding: 15px 25px; /* ขนาดของปุ่ม */
-            margin: 10px 0; /* ระยะห่างระหว่างปุ่ม */
-            /*cursor: pointer;  เปลี่ยนเคอร์เซอร์เป็นรูปมือเมื่อวางเมาส์ */
+            padding: 20px; /* ขนาดของปุ่ม */
+            width: 100%; /* ความกว้างของปุ่มเต็มพื้นที่ */
+            cursor: pointer; /* เปลี่ยนเคอร์เซอร์เป็นรูปมือเมื่อวางเมาส์ */
             border-radius: 10px; /* มุมปุ่มมน */
-            font-size: 1.2rem; /* ขนาดตัวอักษรในปุ่ม */
+            font-size: 1.5rem; /* ขนาดตัวอักษรในปุ่ม */
             transition: transform 0.2s ease-in-out; /* เอฟเฟกต์การเคลื่อนไหว */
+            text-align: center; /* จัดกลางข้อความในปุ่ม */
         }
         
         /* กำหนดสไตล์เมื่อวางเมาส์บนปุ่ม */
