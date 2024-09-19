@@ -57,7 +57,7 @@
             transition: transform 0.2s ease-in-out;
             text-align: center;
         }
-
+            
         .sidebar button:hover {
             transform: translateY(-5px);
         }
@@ -98,7 +98,11 @@
             background-size: cover;
             cursor: url('pic/clickNote.png'), auto; /* Custom cursor */
         }
-
+ :fullscreen #musicCanvas {
+            width: 100vw;
+            height: 100vh;
+            border-radius: 0;
+        }
         .quarter-note {
             position: absolute;
             font-size: 95px;
@@ -297,6 +301,7 @@
                 <button onclick="startGame()">เริ่มเกมส์</button>
                 <button onclick="switchMode('learn.html')">เรียน</button>
                 <button onclick="switchMode('score.html')">คะแนน</button>
+                <button onclick="toggleFullScreen()">ขยายเต็มจอ</button>
     </div>
     
     <div class="content">
@@ -492,6 +497,17 @@
             location.reload();
         }, 5000);
     });
+}
+
+
+function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+        document.getElementById('musicCanvas').requestFullscreen().catch(err => {
+            console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+        });
+    } else {
+        document.exitFullscreen();
+    }
 }
 
     </script>
